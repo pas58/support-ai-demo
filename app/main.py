@@ -67,7 +67,7 @@ elif any(k in text for k in ["return", "refund", "exchange", "возврат", "
     reply = "Возврат возможен в течение 30 дней после получения. Это будет возврат денег или обмен?"
 
 # Order status / Tracking
-elif any(k in text for k in ["order", "tracking", "track", "статус", "заказ", "трек", "номер"]):
+elif any(k in text for k in ["order", "tracking", "track", "status", "where is", "заказ", "где", "мой заказ", "трек", "номер"]):
     reply = "Пожалуйста, напиши номер заказа или трек-номер — я проверю статус."
 
 # Default
