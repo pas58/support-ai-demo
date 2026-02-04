@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  app:
+    build: ./app
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_BASE_URL=${LLM_BASE_URL}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - LLM_MODEL=${LLM_MODEL}
+      - EMBED_MODEL=${EMBED_MODEL}
+    volumes:
+      - ./app:/app
