@@ -58,20 +58,20 @@ def home():
 def chat(msg: ChatMessage):
     text = (msg.message or "").lower()
 
+
 # Delivery / Shipping
-if any(k in text for k in ["delivery", "deliver", "shipping", "ship", "достав", "курьер", "срок"]):
-    reply = "Доставка обычно занимает 3–5 рабочих дней. Если скажешь город или страну — уточню точнее."
+if any(k in text for k in ["достав", "shipping", "delivery"]):
+    reply = "Стандартная доставка занимает 3–5 рабочих дней."
 
 # Returns / Refunds
-elif any(k in text for k in ["return", "refund", "exchange", "возврат", "вернуть", "обмен", "возмещ"]):
+elif any(k in text for k in ["возврат", "вернут", "обмен", "refund", "return"]):
     reply = "Возврат возможен в течение 30 дней после получения. Это будет возврат денег или обмен?"
 
 # Order status / Tracking
-elif any(k in text for k in ["order", "tracking", "track", "status", "where is", "заказ", "где", "мой заказ", "трек", "номер"]):
-    reply = "Пожалуйста, напиши номер заказа или трек-номер — я проверю статус."
+elif any(k in text for k in ["заказ", "где", "мой заказ", "трек", "отслеж", "tracking", "track"]):
+    reply = "Пожалуйста, напишите номер заказа или трек-номер — я проверю статус."
 
 # Default
 else:
     reply = "Уточни, пожалуйста: это про доставку, возврат или статус заказа?"
-
     return {"reply": reply}
