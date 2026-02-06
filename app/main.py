@@ -10,48 +10,60 @@ class ChatMessage(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 def home():
     return """
-    <html>
-        <head>
-            <title>AI Support Demo</title>
-        </head>
-        <body style="font-family: Arial; max-width: 700px; margin: 40px auto;">
-            <h2>AI Support Demo (E-commerce)</h2>
+<html>
+<head>
+    <title>Демонстрация поддержки ИИ</title>
+</head>
+<body style="font-family: Arial; max-width: 700px; margin: 40px auto;">
 
-            <div style="margin: 14px 0; color: #666;">
-                Examples:
-                <ul>
-                  <li>How long is shipping?</li>
-                  <li>What is your return policy?</li>
-                  <li>Where is my order?</li>
-                </ul>
-            </div>
+    <h2>Демонстрация поддержки ИИ (электронная коммерция)</h2>
 
-            <input id="msg" style="width: 78%; padding: 10px;" placeholder="Type your message..." />
-            <button onclick="sendMsg()" style="padding: 10px 14px;">Send</button>
+    <div style="margin: 14px 0; color: #555;">
+        <strong>Примеры вопросов клиентов:</strong>
+        <ul>
+            <li>Сколько времени занимает доставка?</li>
+            <li>Как оформить возврат товара?</li>
+            <li>Где мой заказ?</li>
+        </ul>
+    </div>
 
-            <div id="chat" style="margin-top: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 10px; min-height: 180px;"></div>
+    <input
+        id="msg"
+        style="width: 78%; padding: 10px;"
+        placeholder="Введите вопрос клиента..."
+    />
+    <button onclick="sendMsg()" style="padding: 10px 14px;">
+        Отправить
+    </button>
 
-            <script>
-              async function sendMsg() {
-                const inp = document.getElementById('msg');
-                const text = inp.value.trim();
-                if (!text) return;
+    <div
+        id="chat"
+        style="margin-top: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 10px; min-height: 180px;"
+    ></div>
 
-                const chat = document.getElementById('chat');
-                chat.innerHTML += `<p><b>You:</b> ${text}</p>`;
-                inp.value = '';
+    <script>
+        async function sendMsg() {
+            const input = document.getElementById("msg");
+            const chat = document.getElementById("chat");
+            const text = input.value.trim();
+            if (!text) return;
 
-                const res = await fetch('/api/chat', {
-                  method: 'POST',
-                  headers: {'Content-Type': 'application/json'},
-                  body: JSON.stringify({message: text})
-                });
-                const data = await res.json();
-                chat.innerHTML += `<p><b>Assistant:</b> ${data.reply}</p>`;
-              }
-            </script>
-        </body>
-    </html>
+            chat.innerHTML += "<p><strong>Вы:</strong> " + text + "</p>";
+            input.value = "";
+
+            const res = await fetch("/api/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ message: text })
+            });
+
+            const data = await res.json();
+            chat.innerHTML += "<p><strong>Ассистент:</strong> " + data.reply + "</p>";
+        }
+    </script>
+
+</body>
+</html>
     """
 
 @app.post("/api/chat")
